@@ -7,13 +7,13 @@ std::vector<int>primes;
 void calculate_primes(int how_many){
 if(how_many == 1) 
 {
-prime.emplace_back(2);
+primes.emplace_back(2);
 return;
 }
 int generated_number=1;
-prime.emplace_back(2);
+primes.emplace_back(2);
 int prime_candidate =3;
-while (generated_numbers<how_many)
+while (generated_number<how_many)
 {
 bool is_prime= true;
 for (int i=3;i<std::sqrt(prime_candidate);i+=2)
@@ -25,22 +25,22 @@ break;
 }
 if (is_prime)
 {
-prime.emplace_back(prime_candidate);
-generated_numbers++;
+primes.emplace_back(prime_candidate);
+generated_number++;
 }
-prime_candidated+=2;
+prime_candidate+=2;
 }
 }
 int main()
 {
 int how_many_primes;
-std::cout<<"Enter number of primes you wish to generate\n"
+std::cout<<"Enter number of primes you wish to generate\n";
 std::cin>>how_many_primes;
 std::thread t1(calculate_primes,how_many_primes);
 t1.join();
 for(int i=0;i<primes.size();i++)
 {
-std::cout<<primes[i]<<'';
+std::cout<<primes[i]<<' ';
 if(i%10 == 0 && i!=0)
 {
 std::cout<<'\n';
