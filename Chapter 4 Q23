@@ -5,32 +5,50 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-std::vector<int>primes;
-void SieveOfEratosthenes(int n)
+bool isPrime(int n)
 {
+    if (n <= 1)  return false;
+    if (n <= 3)  return true;
+   
+    if (n%2 == 0 || n%3 == 0) 
+        return false;
+   
+    for (int i=5; i*i<=n; i=i+6)
+        if (n%i == 0 || n%(i+2) == 0)
+           return false;
+   
+    return true;
+}
 
-    bool prime[n + 1];
-    memset(prime, true, sizeof(prime));
-    for (int p = 2; p * p <= n; p++)
+int nextPrime(int N)
+{
+ 
+    if (N <= 1)
+        return 2;
+ 
+    int prime = N;
+    bool found = false;
+    while (!found)
     {
-        if (prime[p] == true)
-        {
-           for (int i = p * p; i <= n; i += p)
-                 prime[i] = false;
-        }
+        prime++;
+        if (isPrime(prime))
+            found = true;
     }
  
-    for (int p = 2; p <= n; p++)
-        if (prime[p])
-            cout << p << " ";
+    return prime;
 }
 int main()
 {
-  int how_many_primes;
+  int Largest_Number,i=0;
+  int arr[100]={};
   cout<<"Enter number till which primes you wish to generate\n";
-  cin>>how_many_primes;
-  thread t1(SieveOfEratosthenes,how_many_primes);
-  t1.join();
+  cin>>Largest_Number;
+  while(i<Largest_Number)
+  {
+    thread t1(nextPrime,arr[i]);
+    arr[i] = t1;
+    i++;
+  }
   for(int i=0;i<primes.size();i++)
     {
           std::cout<<primes[i]<<' ';
