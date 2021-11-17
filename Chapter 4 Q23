@@ -5,57 +5,36 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool isPrime(int n)
+using namespace std;
+
+void nextPrime(int upto)
 {
-    if (n <= 1)  return false;
-    if (n <= 3)  return true;
-   
-    if (n%2 == 0 || n%3 == 0) 
-        return false;
-   
-    for (int i=5; i*i<=n; i=i+6)
-        if (n%i == 0 || n%(i+2) == 0)
-           return false;
-   
-    return true;
+    int num, i;
+    
+    if(upto >= 2) {
+        cout << "2 ";
+    }
+    
+    for(num = 2; num <= upto; num++) {
+        for(i = 2; i <= (num / 2); i++) {
+            if(num % i == 0) {
+                i = num;
+                break;
+            }
+        }
+        // If the number is prime then print it.
+        if(i != num) {
+            cout << num << " ";
+        }
+    }
 }
 
-int nextPrime(int N)
-{
- 
-    if (N <= 1)
-        return 2;
- 
-    int prime = N;
-    bool found = false;
-    while (!found)
-    {
-        prime++;
-        if (isPrime(prime))
-            found = true;
-    }
- 
-    return prime;
-}
 int main()
 {
-  int Largest_Number,i=0;
-  int arr[100]={};
-  cout<<"Enter number till which primes you wish to generate\n";
-  cin>>Largest_Number;
-  while(i<Largest_Number)
-  {
-    thread t1(nextPrime,arr[i]);
-    arr[i] = t1;
-    i++;
-  }
-  for(int i=0;i<primes.size();i++)
-    {
-          std::cout<<primes[i]<<' ';
-          if(i%10 == 0 && i!=0)
-              {
-                    cout<<'\n';
-              }
-    }
-return 0;
+    int Largest_Number;
+    cout<<"Enter number till which primes you wish to generate\n";
+    cin>>Largest_Number;
+    thread t1(nextPrime, Largest_Number);
+    t1.join();
+    return 0;
 }
