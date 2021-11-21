@@ -16,14 +16,14 @@ int main(int arguments, char* arg[])
     pipe(p);
     if( arguments != 3 ) 
     {
-        printf("ERROR: Need exactly 2 parameters.\n");
+        printf("ERROR: Need exactly 2 additional parameters.\n");
         exit(1);
     }
     int fileOpen = open(arg[1], 0);
     int TargetFile = open(arg[2], O_RDWR|O_CREAT|O_APPEND, 0666);
     if (fileOpen == -1 || TargetFile == -1) 
     {
-        printf("File can not be opend\n");
+        printf("File can not be opened\n");
         exit(1);
     }
     childid = fork();
