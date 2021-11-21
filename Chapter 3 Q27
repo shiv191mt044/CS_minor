@@ -32,7 +32,7 @@ int main(int arguments, char* arg[])
         close(p[1]);
 	while (read(p[0], readBuff, sizeof(readBuff)) > 0) 
 	{
-		write(TargetFile, readBuff, strlen(readBuff) - 1);
+		write(TargetFile, readBuff, strlen(readBuff));
         }
         close(p[0]);
         close(TargetFile);
